@@ -1,32 +1,26 @@
-import React from 'react';
-import Book from './Book';
+import React, {Component} from 'react';
 
-const SearchResults = props => {
-  const { searchBooks, myBooks, onMove } = props;
 
-  const updatedBooks = searchBooks.map(book => {
-    myBooks.map(b => {
-      if (b.id === book.id) {
-        book.shelf = b.shelf;
-      }
-      return b;
+class SearchResults extends Component{
+  state = {
+    value: '',
+  };
+  handleChange = event => {
+
+    const val = event.target.value;
+    this.setState({value: val }, () => {
+      this.props.onSearch(val);
     });
-    return book;
-  });
-  return (
-    <div className="search-books-results">
-      <ol className="books-grid">
-        {updatedBooks.map(book => (
-          <Book
-            key={book.id}
-            book={book}
-            shelf={book.shelf ? book.shelf : 'none'}
-            onMove={onMove}
-          />
-        ))}
-      </ol>
-    </div>
-  );
-};
+  };
+
+  render() {
+    return (
+      <div className="search-books-input-wrapper">
+        <input type="text" autoFocus value={this.state.value} placeholder="search author or title" onChange={this.handleChange} /> 
+      </div>
+    );
+  }
+
+}
 
 export default SearchResults;
