@@ -10,7 +10,7 @@ Clone the repository and run MyReads locally
 * cd reactnd-project-myreads-starter
 * npm install
 
-#To run 
+# To run 
 
 * npm start
 
